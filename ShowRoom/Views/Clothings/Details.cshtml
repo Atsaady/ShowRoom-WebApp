@@ -1,0 +1,68 @@
+﻿@model ShowRoom.Models.Clothings
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DetailsLayout.cshtml";
+}
+
+
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">
+            Clothings Details
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <!-- //tittle heading -->
+        <div class="col-md-5 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="thumb-image">
+                    <img src="~/@Html.DisplayFor(model => model.ImageUrl)" data-imagezoom="true" class="img-responsive" alt="">
+                </div>
+
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-7 single-right-left simpleCart_shelfItem">
+            <h3>@Html.DisplayFor(model => model.Name)</h3>
+
+            <p>
+                <div class="w3l-pricehkj">
+                    <h6>@Html.DisplayFor(model => model.Price) ILS</h6>
+                </div>
+            </p>
+            <p>
+                <h4>Brand: @Html.DisplayFor(model => model.Brand)</h4>
+            </p>
+            <div class="single-infoagile">
+                <ul>
+                    <li>
+                        <h6>@Html.DisplayFor(model => model.Description)</h6>
+                    </li>
+                </ul>
+            </div>
+            <div class="product-single-w3l">
+                <p>
+                    <h6>Fast Delivery</h6>
+                </p>
+                <p>
+                    All products products are <label>non-returnable.</label>
+                </p>
+                <div class="btn mr-2">
+                    <a class="snipcart-details" asp-action="AddToCart" asp-route-id="@Model.Id">
+                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                    </a>
+                    <a class="snipcart-details" asp-action="Index">
+                        <input type="submit" name="submit" value="Back to store" class="button-back" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

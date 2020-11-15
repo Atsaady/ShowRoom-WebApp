@@ -1,0 +1,233 @@
+﻿
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>ShowRoom</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+    <script>
+    addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }</script>
+    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <!--//tags -->
+    <link href="~/lib/shop-web/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/lib/shop-web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/lib/shop-web/css/font-awesome.css" rel="stylesheet">
+    <!--pop-up-box-->
+    <link href="~/lib/shop-web/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//pop-up-box-->
+    <!-- price range -->
+    <link rel="stylesheet" type="text/css" href="~/css/styles.css">
+
+    <!--Search-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+
+    <!-- flexslider -->
+    <link rel="stylesheet" href="~/lib/shop-web/css/flexslider.css" type="text/css" media="screen" />
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    @{ var userId = Context.User.Claims.FirstOrDefault(c => c.Type == "FullName")?.Value; }
+
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
+        <div class="container">
+            @*maor*@
+            <span class="nav-item"><a class="navbar-brand js-scroll-trigger" asp-area="" asp-controller="Main" asp-action="Index">ShowRoom</a></span>
+            <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ml-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                @*maor*@
+                <ul class="navbar-nav ml-auto"
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Carts" asp-action="Index"><span class="fa fa-shopping-cart"></span></a></li>
+                </ul>
+
+                @if (@userId != null)
+                {<!-- Nav Item - User Information -->
+                                    <li class="navbar-nav nav-item dropdown no-arrow">
+                                        <a class="nav-link dropdown-toggle text-warning" @*href="#"*@ id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="text-uppercase ml-auto">@userId</span>
+                                        </a>
+                                        <!-- Dropdown - User Information -->
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                            <a class="dropdown-item" asp-area="" asp-controller="/" asp-action="Index">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Home
+                                            </a>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Profile
+                                            </a>
+
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Logout
+                                            </a>
+                                        </div>
+                                    </li> }
+
+                                else
+                                {
+                                    //maor
+                    <li class="navbar-nav nav-item"><a class="nav-link js-scroll-trigger text-warning" asp-area="" asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-log-in text-uppercase"></span>Login</a></li>
+                                    <li class="navbar-nav nav-item"><a class="nav-link js-scroll-trigger text-warning" asp-area="" asp-controller="Account" asp-action="Register"><span class="glyphicon glyphicon-log-in text-uppercase"></span>Register</a></li>
+                                                    <li class="navbar-nav nav-item"><a class="nav-link js-scroll-trigger text-warning" asp-area="" asp-controller="Contact" asp-action="Index"><span class="glyphicon glyphicon-log-in text-uppercase"></span>Contact</a></li>}
+
+
+
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn mx-2 btn-primary" asp-controller="Account" asp-action="Logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+
+
+    <!-- //banner -->
+    <!-- top Clothings -->
+    <div class="ads-grid">
+        <div class="container">
+            <!-- tittle heading -->
+            <br />
+            <!-- product -->
+
+            @RenderBody()
+
+            <!-- //product -->
+        </div>
+    </div>
+    <!-- //top products -->
+    <!-- footer -->
+    <!-- Footer-->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-center">Copyright © ShowRoom 2020 </div>
+                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FCorona-Store-109909177482334%2F%3Fmodal%3Dadmin_todo_tour&width=450&layout=standard&action=like&size=large&share=true&height=35&appId" width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- js-files -->
+
+    <!-- jquery for range slider-->
+    <script src="~/lib/shop-web/js/jquery-2.1.4.min.js"></script>
+    <!-- //jquery for range slider-->
+    <!-- //cart-js -->
+    <script src="~/lib/shop-web/js/jquery-ui.js"></script>
+
+    <!-- flexisel (for relevant prodcuts) -->
+    <script src="~/lib/shop-web/js/jquery.flexisel.js"></script>
+    <script>
+        $(window).load(function () {
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 3,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 2
+                    }
+                }
+            });
+
+        });
+    </script>
+    <!-- //flexisel (for relevant prodcuts) -->
+    <!-- smooth-scrolling-Move Top -->
+    <script src="~/lib/shop-web/js/move-top.js"></script>
+    <script>
+        $(document).ready(function () {
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+
+    <!-- //smooth-scrolling-Move Top -->
+    <!-- for bootstrap working -->
+    <script src="~/lib/shop-web/js/bootstrap.js"></script>
+
+    <!-- //for bootstrap working -->
+    <!-- //js-files -->
+    <!-- //coursol ERROR , logout window NECESSARY -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <!-- Bootstrap core JS-->
+
+    <!-- //logout function NECESSARY -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+    @*maor*@
+    <script src="~/js/scripts.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>var $jQuery_ui_1_12_1 = jQuery.noConflict(true)</script>
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>
